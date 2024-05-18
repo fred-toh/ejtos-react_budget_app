@@ -30,20 +30,20 @@ export const AppReducer = (state, action) => {
                     ...state
                 }
             }
-            case 'RED_EXPENSE':
-                const red_expenses = state.expenses.map((currentExp)=> {
-                    if (currentExp.name === action.payload.name && currentExp.cost - action.payload.cost >= 0) {
-                        currentExp.cost =  currentExp.cost - action.payload.cost;
-                        budget = state.budget + action.payload.cost
-                    }
-                    return currentExp
-                })
-                action.type = "DONE";
-                return {
-                    ...state,
-                    expenses: [...red_expenses],
-                };
-            case 'DELETE_EXPENSE':
+        case 'RED_EXPENSE':
+            const red_expenses = state.expenses.map((currentExp)=> {
+                if (currentExp.name === action.payload.name && currentExp.cost - action.payload.cost >= 0) {
+                    currentExp.cost =  currentExp.cost - action.payload.cost;
+                    budget = state.budget + action.payload.cost
+                }
+                return currentExp
+            })
+            action.type = "DONE";
+            return {
+                ...state,
+                expenses: [...red_expenses],
+            };
+        case 'DELETE_EXPENSE':
             action.type = "DONE";
             state.expenses.map((currentExp)=> {
                 if (currentExp.name === action.payload) {
@@ -59,8 +59,18 @@ export const AppReducer = (state, action) => {
             };
         case 'SET_BUDGET':
             action.type = "DONE";
-            state.budget = action.payload;
-
+            const value = action.payload;
+            const totalExpenses = state.expenses.reduce((total,item) => {
+                return (total += item.cost);
+            }, 0);
+            // state.budget = action.payload;
+            if (value > state.budgetLimit) {
+                alert("The budget exceeds limit: £"+state.budgetLimit);
+            } else if (value < totalExpenses) {
+                alert("You cannot reduce the budget value lower than the spending.");
+            } else {
+                state.budget = value;
+            }
             return {
                 ...state,
             };
@@ -86,7 +96,8 @@ const initialState = {
         { id: "Human Resource", name: 'Human Resource', cost: 40 },
         { id: "IT", name: 'IT', cost: 500 },
     ],
-    currency: '£'
+    currency: '£',
+    budgetLimit: 20000,
 };
 
 // 2. Creates the context this is the thing our components import and use to get the state
