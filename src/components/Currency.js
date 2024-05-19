@@ -16,14 +16,13 @@ const Currency = () => {
         <div className='alert alert-secondary'> 
         {
             <label style={{marginLeft: '1rem' , backgroundColor:'#93E499', color:'white'}} >
-            Currency
-            <select name='hover_color'id="currency" onChange={(event)=>changeCurrency(event)} 
-                style={{ marginLeft: '1rem' , backgroundColor:'#93E499', color:'white'}}>
-                <option style={{color:'black'}} value="$">$ Dollar</option>
-                <option selected style={{color:'black'}} value="£" >£ Pound</option>
-                <option style={{color:'black'}} value="€">€ Euro</option>
-                <option style={{color:'black'}} value="₹">₹ Ruppee</option>
-            </select>
+            Currency 
+            <select class='hover_color'id="currency" onChange={(event)=>changeCurrency(event)}>
+                <option value="$">$ Dollar</option>
+                <option selected value="£" >£ Pound</option>
+                <option value="€">€ Euro</option>
+                <option value="₹">₹ Ruppee</option>
+            </select> 
             </label>
         }	
         </div>
