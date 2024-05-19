@@ -65,7 +65,7 @@ export const AppReducer = (state, action) => {
             }, 0);
             // state.budget = action.payload;
             if (value > state.budgetLimit) {
-                alert("The budget exceeds limit: £"+state.budgetLimit);
+                alert("The budget exceeds limit: "+state.currency+state.budgetLimit);
             } else if (value < totalExpenses) {
                 alert("You cannot reduce the budget value lower than the spending.");
             } else {
