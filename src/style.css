@@ -1,0 +1,10 @@
+.hover_color {
+    margin-left: '1rem';
+    background-color:#93E499;
+    color: white;
+    border-color: #93E499;
+}
+
+.hover_color option {
+    color: black;
+}
